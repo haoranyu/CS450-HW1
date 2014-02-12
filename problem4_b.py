@@ -1,11 +1,12 @@
 from __future__ import division
 import numpy as np
-def row_exchange(A, n):
+def row_exchange(A, b, n):
     for col in range(0, n):
         B = abs(A[col:n,:n])
         maxRow = B[:,col].argmax() + col
         A[[col,maxRow]] = A[[maxRow,col]]
-    return A
+        b[[col,maxRow]] = b[[maxRow,col]]
+    return A, b
 
 def forward_elimination(A, b, n):
     for col in range(0, n-1):
@@ -32,7 +33,7 @@ def back_substitution(A, b, n):
 
 def gauss_partial_pivoting(A, b):
     n = len(A[0])
-    A = row_exchange(A.copy(), n)
+    A, b = row_exchange(A.copy(), b.copy(), n)
     if any(np.diag(A)==0): 
         return 0
     else: 

@@ -11,7 +11,7 @@ b = np.dot(A,x)
 D =  np.diag(np.linspace(1, 100, 100))
 
 sol = la.solve(np.dot(D,A), np.dot(D,b))
-r = np.dot(D,b) - np.dot(np.dot(D,A),np.dot(D,sol))
+r = np.dot(np.dot(D,A),np.dot(D,sol)) - np.dot(D,b)
 
 print "relative residuals: %g" % (la.norm(r) / la.norm(np.dot(D,b)))
 print "relative error: %g" % (la.norm(sol-x) / la.norm(x))

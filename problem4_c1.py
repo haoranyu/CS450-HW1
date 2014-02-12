@@ -12,20 +12,20 @@ x = np.random.randn(n, 1)
 b = np.dot(A, x)
 
 print "condition number for matrix A : \t%g" % la.cond(A)
-x_1 = gauss(A.copy(), b.copy())
+x_1 = gauss(np.copy(A), np.copy(b))
 if(type(x_1) is int):
 	print "un-pivoted solves failed"
 else:
-	print "residual from un-pivoted solve: \t%g" % (la.norm(b - np.dot(A, x_1)))
-	print "error from un-pivoted solve: \t%g" % (la.norm(x-x_1))
+	print "residual from un-pivoted solve: \t%g" % (la.norm(b - np.dot(A, x_1)) / la.norm(b))
+	print "error from un-pivoted solve: \t%g" % (la.norm(x-x_1)/la.norm(x))
 
-x_2 = gauss_partial_pivoting(A.copy(), b.copy())
+x_2 = gauss_partial_pivoting(np.copy(A), np.copy(b))
 if(type(x_2) is int):
 	print "partial_pivoting solves failed"
 else:
-	print "residual from  partially-pivoted solve: \t%g" % (la.norm(b - np.dot(A, x_2)))
-	print "error from  partially-pivoted solve: \t%g" % (la.norm(x-x_2))
+	print "residual from  partially-pivoted solve: \t%g" % (la.norm(b - np.dot(A, x_2)) / la.norm(b))
+	print "error from  partially-pivoted solve: \t%g" % (la.norm(x-x_2)/la.norm(x))
 
-x_3 = la.solve(A.copy(), b.copy())
-print "residual from np.linalg.solve: \t%g" % (la.norm(b - np.dot(A, x_3)))
-print "error from np.linalg.solve: \t%g" % (la.norm(x-x_3))
+x_3 = la.solve(np.copy(A), np.copy(b))
+print "residual from np.linalg.solve: \t%g" % (la.norm(b - np.dot(A, x_3)) / la.norm(b))
+print "error from np.linalg.solve: \t%g" % (la.norm(x-x_3)/la.norm(x))

@@ -12,7 +12,7 @@ D = np.diag(2*np.ones(n))
 
 sol = la.solve(np.dot(D,A), np.dot(D,b))
 
-r = np.dot(D,b) - np.dot(np.dot(D,A),np.dot(D,sol))
+r =  np.dot(np.dot(D,A),np.dot(D,sol)) - np.dot(D,b)
 
 print "relative residuals: %g" % (la.norm(r) / la.norm(np.dot(D,b)))
 print "relative error: %g" % (la.norm(sol-x) / la.norm(x))

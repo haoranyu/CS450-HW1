@@ -10,7 +10,7 @@ x = np.ones((n,1))
 b = np.dot(A,x)
 sol = la.solve(A, b)
 
-r = b - np.dot(A,sol)
+r = np.dot(A,sol) - b
 
 print "relative residuals: %g" % (la.norm(r) / la.norm(b))
 print "relative error: %g" % (la.norm(sol-x) / la.norm(x))
